@@ -87,7 +87,7 @@ public class Events {
 				float[] engi = new float[3];;
 				float fuel = vehicle.getVehicleData().getAttributeFloat("fuel_quality", 1);
 				if(fuel > 1) fuel = 1;
-				if(fuel < 1) fuel = 1 - fuel;
+				if(fuel <= 1) fuel = 1 - fuel;
 				float throttle = (float)vehicle.throttle;
 				if(throttle < 0) throttle = Math.abs(throttle);
 				if(throttle < 0.1) throttle = 0.1f; 
