@@ -15,7 +15,7 @@ public class FVTMPotRConfig {
 	
 	@Config.Comment("Default Vehicle Engine Carbon Emission (when engine isn't configured for fvtm-potr)")
 	@Config.RangeInt(min = 0, max = 16)
-	public static float VEHICLE_ENGINE_CARBON_EMISSION = 0.5f;
+	public static float VEHICLE_ENGINE_CARBON_EMISSION = 0.2f;
 
 	@Config.Comment("Default Vehicle Engine Sulfur Emission (when engine isn't configured for fvtm-potr)")
 	@Config.RangeInt(min = 0, max = 16)
@@ -23,6 +23,6 @@ public class FVTMPotRConfig {
 
 	@Config.Comment("Default Vehicle Engine Dust Emission (when engine isn't configured for fvtm-potr)")
 	@Config.RangeInt(min = 0, max = 16)
-	public static float VEHICLE_ENGINE_DUST_EMISSION = 0.5f;
+	public static float VEHICLE_ENGINE_DUST_EMISSION = 0.2f;
 	
 }
