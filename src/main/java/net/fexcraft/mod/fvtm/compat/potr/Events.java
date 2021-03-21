@@ -1,8 +1,15 @@
 package net.fexcraft.mod.fvtm.compat.potr;
 
 import static net.fexcraft.mod.fvtm.compat.potr.FVTMPotRConfig.VEHICLE_EMISSION_INTERVAL;
+import static net.fexcraft.mod.fvtm.compat.potr.FVTMPotRConfig.VEHICLE_ENGINE_CARBON_EMISSION;
+import static net.fexcraft.mod.fvtm.compat.potr.FVTMPotRConfig.VEHICLE_ENGINE_DUST_EMISSION;
+import static net.fexcraft.mod.fvtm.compat.potr.FVTMPotRConfig.VEHICLE_ENGINE_SULFUR_EMISSION;
 
+import java.util.List;
+
+import net.fexcraft.mod.fvtm.data.part.Function;
 import net.fexcraft.mod.fvtm.event.ResourceEvents;
+import net.fexcraft.mod.fvtm.event.TypeEvents;
 import net.fexcraft.mod.fvtm.sys.uni.GenericVehicle;
 import net.fexcraft.mod.fvtm.util.function.EngineFunction;
 import net.minecraft.entity.Entity;
@@ -25,6 +32,33 @@ public class Events {
 		event.registerFunction("fvtm_potr:emission_filter", EmissionFilter.class);
 	}
 	
+	@SubscribeEvent
+	public static void checkEngines(TypeEvents.PartCreated event){
+		if(containsEngineButNotEmitter(event.getType().getDefaultFunctions())){
+			event.getType().getDefaultFunctions().add(new EmissionEmitter(event.getType(), true,
+				VEHICLE_ENGINE_CARBON_EMISSION, VEHICLE_ENGINE_SULFUR_EMISSION, VEHICLE_ENGINE_DUST_EMISSION));
+		}
+	}
+	
+	private static boolean containsEngineButNotEmitter(List<Function> defs){
+		boolean bool = false;
+		for(Function func : defs){
+			if(func.getId().equals("fvtm:engine")){
+				bool = true;
+				break;
+			}
+		}
+		if(bool){
+			for(Function func : defs){
+				if(func.getId().equals(EmissionEmitter.ID)){
+					return false;
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+
 	@SubscribeEvent
 	public static void onAttachEntityCapabilities(AttachCapabilitiesEvent<Entity> event){
 		if(event.getObject().world == null || event.getObject().world.isRemote) return;

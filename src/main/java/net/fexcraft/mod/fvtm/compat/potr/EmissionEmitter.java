@@ -23,6 +23,14 @@ public class EmissionEmitter extends StaticFunction {
 		engine = JsonUtil.getIfExists(obj, "engine", true);
 	}
 
+	public EmissionEmitter(Part type, boolean engine, float... vals){
+		super(type, null);
+		this.engine = engine;
+		carbon = vals[0];
+		sulfur = vals[1];
+		dust = vals[2];
+	}
+
 	@Override
 	public String getId(){
 		return ID;
