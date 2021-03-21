@@ -99,7 +99,9 @@ public class VehicleEmissionCacheHandler implements ICapabilitySerializable<NBTB
 
 		@Override
 		public void clearAccumutor(){
-			accumulated = new float[3];
+			accumulated[0] = 0;//accumulated[0] % 1;
+			accumulated[1] = 0;//accumulated[1] % 1;
+			accumulated[2] = 0;//accumulated[2] % 1;
 		}
 
 		@Override
