@@ -1,13 +1,19 @@
 package net.fexcraft.mod.fvtm.compat.potr;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import net.fexcraft.lib.common.json.JsonUtil;
+import net.fexcraft.lib.mc.utils.Formatter;
 import net.fexcraft.mod.fvtm.data.part.Function.StaticFunction;
 import net.fexcraft.mod.fvtm.data.part.Part;
+import net.fexcraft.mod.fvtm.data.part.PartData;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public class EmissionFilter extends StaticFunction {
 	
@@ -45,5 +51,10 @@ public class EmissionFilter extends StaticFunction {
 	public float dust(){
 		return dust;
 	}
+	
+	@Override
+    public void addInformation(ItemStack stack, World world, PartData data, List<String> list, ITooltipFlag flag){
+    	list.add(Formatter.format("&bFiltering: &8" + carbon + " &a| &e" + sulfur + " &a| &7" + dust));
+    }
 
 }
