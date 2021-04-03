@@ -7,6 +7,9 @@ import static net.fexcraft.mod.fvtm.compat.potr.FVTMPotRConfig.VEHICLE_ENGINE_SU
 
 import java.util.List;
 
+import net.fexcraft.lib.common.Static;
+import net.fexcraft.lib.common.math.Vec3f;
+import net.fexcraft.mod.fvtm.data.attribute.Attribute;
 import net.fexcraft.mod.fvtm.data.part.Function;
 import net.fexcraft.mod.fvtm.event.ResourceEvents;
 import net.fexcraft.mod.fvtm.event.TypeEvents;
@@ -15,6 +18,7 @@ import net.fexcraft.mod.fvtm.util.function.EngineFunction;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -116,16 +120,37 @@ public class Events {
 		}
 		cache.accumulate(vals);
 		if(cache.timer() >= VEHICLE_EMISSION_INTERVAL){
-			pollute(vehicle.world, vehicle.getPosition(), cache.accumulated(), VEHICLE_EMISSION_INTERVAL);
+			pollute(vehicle.world, vehicle, cache.accumulated(), VEHICLE_EMISSION_INTERVAL);
 			cache.timer(0);
 			cache.clearAccumutor();
 		}
 		else cache.timer(cache.timer() + 1);
 	}
 	
-	private static void pollute(World world, BlockPos position, float[] accumulated, int div){
-		VehicleEmitter.set(div, accumulated);
-		FVTMPotR.VECHILE.emitAt(world, position);
+	private static BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
+	
+	private static void pollute(World world, GenericVehicle vehicle, float[] accumulated, int div){
+		List<Attribute<?>> list = vehicle.getVehicleData().getAttributeGroup("exhaust");
+		if(list.isEmpty()){
+			VehicleEmitter.set(div, accumulated);
+			FVTMPotR.VECHILE.emitAt(world, pos.setPos(vehicle));
+		}
+		else{
+			Vec3d temp = null;
+			Vec3f vec = null;
+			if(list.size() > 1){
+				accumulated[0] /= list.size();
+				accumulated[1] /= list.size();
+				accumulated[2] /= list.size();
+			}
+			VehicleEmitter.set(div, accumulated);
+			for(Attribute<?> attr : list){
+				vec = attr.vector_value();
+				temp = vehicle.getRotPoint().getRelativeVector(vec.xCoord * Static.sixteenth, -vec.yCoord * Static.sixteenth, -vec.zCoord * Static.sixteenth);
+				temp = temp.add(vehicle.getPositionVector());
+				FVTMPotR.VECHILE.emitAt(world, pos.setPos(temp.x, temp.y, temp.z));
+			}
+		}
 	}
 
 }
