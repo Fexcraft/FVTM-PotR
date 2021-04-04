@@ -149,6 +149,10 @@ public class Events {
 				temp = vehicle.getRotPoint().getRelativeVector(vec.xCoord * Static.sixteenth, -vec.yCoord * Static.sixteenth, -vec.zCoord * Static.sixteenth);
 				temp = temp.add(vehicle.getPositionVector());
 				FVTMPotR.VECHILE.emitAt(world, pos.setPos(temp.x, temp.y, temp.z));
+				/*ChunkPollution pollution = WorldData.getChunkPollution(world, new BlockPos(temp.x, temp.y, temp.z));
+				pollution.getInfos().forEach(info -> {
+					Print.debug(info.getAmount(), info.getPollutant().getRegistryName());
+				});*/
 			}
 		}
 	}
