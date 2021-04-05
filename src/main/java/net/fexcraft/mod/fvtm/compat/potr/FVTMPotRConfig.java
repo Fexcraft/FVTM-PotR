@@ -14,7 +14,7 @@ public class FVTMPotRConfig {
 	public static int VEHICLE_EMISSION_INTERVAL = 10;
 	
 	@Config.Comment("Default Vehicle Engine Carbon Emission (when engine isn't configured for fvtm-potr)")
-	@Config.RangeInt(min = 0, max = 16)
+	@Config.RangeInt(min = 0, max = 100)
 	public static float VEHICLE_ENGINE_CARBON_EMISSION = 0.2f;
 
 	@Config.Comment("Default Vehicle Engine Sulfur Emission (when engine isn't configured for fvtm-potr)")
