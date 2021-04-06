@@ -146,7 +146,7 @@ public class Events {
 			VehicleEmitter.set(div, accumulated);
 			for(Attribute<?> attr : list){
 				vec = attr.vector_value();
-				temp = vehicle.getRotPoint().getRelativeVector(vec.xCoord * Static.sixteenth, -vec.yCoord * Static.sixteenth, -vec.zCoord * Static.sixteenth);
+				temp = vehicle.getRotPoint().getRelativeVector(vec.x * Static.sixteenth, -vec.y * Static.sixteenth, -vec.z * Static.sixteenth);
 				temp = temp.add(vehicle.getPositionVector());
 				FVTMPotR.VECHILE.emitAt(world, pos.setPos(temp.x, temp.y, temp.z));
 				/*ChunkPollution pollution = WorldData.getChunkPollution(world, new BlockPos(temp.x, temp.y, temp.z));
