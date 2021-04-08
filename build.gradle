@@ -53,7 +53,7 @@ dependencies {
 		compile 'com.github.Fexcraft:FCL:1.12.2-SNAPSHOT'
 		compile 'com.github.Fexcraft:FVTM:1.12.2-SNAPSHOT'
 	}
-    deobfCompile 'curse.maven:pollution-of-the-realms-269973:3202415'
+    deobfCompile 'curse.maven:pollution-of-the-realms-269973:3263889'
     deobfCompile 'curse.maven:forgeendertech-244844:3137504'
 }
 
