@@ -17,7 +17,7 @@ public class VehicleEmitter extends Emitter {
 	public static float CR, SR, DR;
 
 	public VehicleEmitter(UnitConfig config, Emissions emissions){
-		super(config, UnitId.EMPTY, KeyValuePair.from("fvtm:vehicle"), true, "#hardcoded", false, new String[0], emissions);
+		super(config, UnitId.EMPTY, KeyValuePair.from("fvtm:vehicle"), true, "#hardcoded", false, new String[0], emissions, 1);
 	}
 	
 	@Override
