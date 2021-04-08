@@ -19,7 +19,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Mod(modid = FVTMPotR.MODID, name = FVTMPotR.NAME, version = FVTMPotR.VERSION)
+@Mod(modid = FVTMPotR.MODID, name = FVTMPotR.NAME, version = FVTMPotR.VERSION, acceptableRemoteVersions = "*", acceptedMinecraftVersions = "*", dependencies = "required-after:fcl;required-after:fvtm;required-after:adpother")
 public class FVTMPotR {
 	
     public static final String MODID = "fvtm_potr";
