@@ -2,10 +2,10 @@ package net.fexcraft.mod.fvtm.compat.potr;
 
 import java.io.File;
 
+import com.endertech.minecraft.forge.configs.UnitConfig;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
-import com.endertech.minecraft.forge.configs.UnitConfig;
 import com.endertech.minecraft.mods.adpother.Main;
 import com.endertech.minecraft.mods.adpother.emissions.Emissions;
 
